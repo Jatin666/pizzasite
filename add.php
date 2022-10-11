@@ -1,4 +1,6 @@
 <?php 
+ini_set('display_errors', 1);
+include('config/db_connect.php');
 
 $title = $email = $ingredients = '' ;
 
@@ -21,14 +23,7 @@ if(isset($_POST['submit'])){
         $errors ['email'] = 'email must be a valid email address';
        }
     }
-    if(array_filter($errors)){
-        //echo 'errors in the form';
-    } else{
-        //echo "form is valid";
-        header('Location : index.php');
-    }
-
-    //checking title
+   //checking title
     if(empty($_POST['title'])){
         $errors['title']= 'An title is required <br />';
     } else{
@@ -46,6 +41,27 @@ if(isset($_POST['submit'])){
         if(!preg_match('/^([a-zA-X\s]+)(,\s*[a-zA-z\s]*)*$/',$ingredients)){
             $errors['ingredients'] = 'Ingredients must be comma separeted';
         }
+    }
+
+    if(array_filter($errors)){
+        //echo 'errors in the form';
+    } else{
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $title = mysqli_real_escape_string($conn, $_POST['title']);
+        $ingredients = mysqli_real_escape_string($conn, $_POST['ingredients']);
+
+        // create sql
+        $sql = "INSERT INTO pizzas(title,email,ingredients) VALUES('$title','$email','$ingredients')";
+
+        // save to db and check
+        if(mysqli_query($conn, $sql)){
+            // success
+            header('Location: index.php');
+        } else {
+            echo 'query error: '. mysqli_error($conn);
+        }
+
+    
     }
 
 

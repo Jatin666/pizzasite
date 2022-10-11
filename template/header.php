@@ -17,6 +17,14 @@
             max-width : 460px;
             margin: 20px auto;
             padding: 20px;
+            position:relative;
+            top: -30px;
+        }
+        .pizza{
+            width: 100px;
+            margin: 40px auto -30px;
+            display:block;
+
         }
     </style>
 
@@ -24,10 +32,10 @@
 <body class= "grey lighten-4">
     <nav class = "black z-depth-0">
         <div class = "container">
-            <a href="#" class ="brand-logo brand-text">
+            <a href="index.php" class ="brand-logo brand-text">
                 Pizza Site </a>
             <ul id = "nav-mobile" class= "right hide-on-small-and-down"> 
-                <li><a href="#" class = "btn brand-text z-depth-0" > Add a Pizza</a></li>
+                <li><a href="add.php" class = "btn brand-text z-depth-0" > Add a Pizza</a></li>
             </ul>
 
         </div>
